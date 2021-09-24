@@ -1,0 +1,54 @@
+Instalación de maven en Ubuntu
+
+Para instalar maven en nuestro sistema Ubuntu actualizaremos con el comando update y acto seguido procedemos a la instalación del Maven
+
+```
+sudo apt update
+sudo apt install maven
+```
+
+
+Verificamos que la instalación ha sido correcta preguntando la versión del Maven instalada y deberíamos tener esta salida mostrada en la imagen.
+```
+mvn -version
+```
+
+
+Instalar una versión concreta de Maven
+
+Para realizar la instalación de una versión concreta usaremos el siguiente comando para descargar el fichero.
+```
+wget https://www.apache.org/dist/maven/maven-3/3.8.2/binaries/apache-maven-3.8.2-bin.tar.gz -P /tmp
+```
+
+Una vez completada la descargar usaremos las siguientes ordenes para descomprimir el fichero y realizar un enlace para el directorio donde instalamos el maven.
+```
+Sudo tar xf /tmp/apache-maven-*.tar.gz -C /opt
+sudo ln s /opt/apache-maven-3.8.2 /opt/maven
+```
+
+
+A continuación vamos a añadir las variables de entorno lo realizaremos con el comando nano y añadimos las siguientes lineas de código.
+```
+sudo nano /etc/profile.d/maven.sh
+
+export JAVA_HOME=/usr/lib/jvm/IMPORTANTE-RESPETAR-LA-VERSION-DE-JAVA-INSTALADA
+ export M2_HOME=/opt/maven
+ export MAVEN_HOME=/opt/maven
+ export PATH=${M2_HOME}/bin:${PATH}
+ ```
+ 
+Guardamos y cerramos el archivo. (ctrt+x)
+
+
+Debemos insertar el siguiente comando para que el archivo anterior sea ejecutable, también usaremos el comando sorce para cargar las variables de entorno.
+```
+sudo chmod + /etc/profile.d/maven.sh
+source /etc/profile.d/maven.sh
+```
+
+
+Por ultimo comprobaremos la versión de nuestro Maven debería mostrar el mismo resultado que en la imagen.
+```
+Mvn -version 
+```
